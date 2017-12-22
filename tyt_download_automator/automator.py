@@ -146,6 +146,8 @@ class QueuedDownload(object):
             "NA": "Nerd Alert",
             "OS": "Old School",
             "IN": "TYT Interviews",
+            "RI": "Reporting In",
+            "OT": "Overtime",
         }
         match = re.search(r"(\d{2})(\d{2})(\d{2})__(\w{2}).*\.mp4", filename)
         assert match is not None, "Couldn't parse filename"
