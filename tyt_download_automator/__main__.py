@@ -1,4 +1,4 @@
-from .automator import MainPage, EpisodePage, format_show_filename
+from .automator import MainPage, EpisodePage, QueuedDownload, Downloader
 
 
 def main():
@@ -7,11 +7,13 @@ def main():
     login_page = main_page.click_login_button()
     login_page.enter_credentials()
     page_links = main_page.get_episode_page_links()
-    download_details = []
-    for link in page_links:
-        page = EpisodePage(link)
-        download_url, filename = page.get_download_details()
-        download_details.append((download_url, filename))
+    download_details = [EpisodePage(link).get_download_details() for link in page_links]
+    queued_downloads = [QueuedDownload(url, filename) for url, filename in download_details]
+    downloader = Downloader()
+    for item in queued_downloads:
+        downloader.add_to_queue(item)
+    downloader.process_download_queue()
+    main_page.driver.quit()
     return
 
 

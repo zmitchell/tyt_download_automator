@@ -2,6 +2,7 @@ import re
 import sys
 from pathlib import Path
 
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -100,11 +101,28 @@ class Downloader(object):
     """Handles downloading and organizing episodes"""
 
     def __init__(self):
-        self.previous_downloads = []
-        self.parent_folder = Path(config.download_folder)
+        self.download_queue = []
+        self.download_root = Path(config.download_folder)
+
+    def add_to_queue(self, ep):
+        self.download_queue.append(ep)
+
+    def process_download_queue(self):
+        for item in self.download_queue:
+            folder_path = self.download_root / item.folder_name
+            folder_path.mkdir(exist_ok=True)
+            download_path = folder_path / item.filename
+            if download_path.exists():
+                continue
+            req = requests.get(item.url, stream=True)
+            print(f"Starting download to {download_path}")
+            with download_path.open('wb') as dwn:
+                for chunk in req.iter_content(chunk_size=1024):
+                    dwn.write(chunk)
+            print("...Done")
 
 
-class EpisodeDownload(object):
+class QueuedDownload(object):
     """Contains the information for a file to be downloaded"""
 
     def __init__(self, url, filename):
@@ -125,10 +143,11 @@ class EpisodeDownload(object):
             "AP": "Aggressive Progressives",
             "NA": "Nerd Alert",
             "OS": "Old School",
+            "IN": "TYT Interviews",
         }
         match = re.search(r"(\d{2})(\d{2})(\d{2})__(\w{2}).*\.mp4", filename)
         assert match is not None, "Couldn't parse filename"
         year, month, day, show = match.group(1, 2, 3, 4)
         formatted_filename = f"20{year}-{month}-{day} - {show_codes[show]}.mp4"
-        folder_name = "20{year}-{month}-{day}"
+        folder_name = f"20{year}-{month}-{day}"
         return folder_name, formatted_filename
