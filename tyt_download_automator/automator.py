@@ -14,16 +14,6 @@ from . import config
 
 
 driver = webdriver.Firefox()
-download_details = [
-    ('https:https://content.jwplatform.com/videos/REhemgJS-orz3cQ0p.mp4', '171220__TA.mp4'),
-    ('https:https://content.jwplatform.com/videos/b0msWXD9-orz3cQ0p.mp4', '171220__TB.mp4'),
-    ('https:https://content.jwplatform.com/videos/rJUfmvq0-orz3cQ0p.mp4', '171220__PG.mp4'),
-    ('https:https://content.jwplatform.com/videos/ayRHnF20-orz3cQ0p.mp4', '171220__HQ.mp4'),
-    ('https:https://content.jwplatform.com/videos/868DqXqF-orz3cQ0p.mp4', '171220__OS.mp4'),
-    ('https:https://content.jwplatform.com/videos/JYN6leyZ-orz3cQ0p.mp4', '171214__AP01.mp4'),
-    ('https:https://content.jwplatform.com/videos/Q6WTPvbq-orz3cQ0p.mp4', '171129__MF04SelenaFull.mp4'),  # noqa
-    ('https:https://content.jwplatform.com/videos/sEnXwXcN-orz3cQ0p.mp4', '171219__NA_Members.mp4'),
-]
 
 
 class BasePage(object):
