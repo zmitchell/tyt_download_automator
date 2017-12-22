@@ -18,7 +18,7 @@ test_requirements = [
 setup(
     name='tyt_download_automator',
     version='0.0.0',
-    description="TYT Download Automator automates the processs of downloading new episodes for members of the TYT Network",
+    description="TYT Download Automator automates the process of downloading new episodes for members of the TYT Network",
     long_description=readme + '\n\n',
     author="Zach Mitchell",
     author_email='zmitchell@fastmail.com',
