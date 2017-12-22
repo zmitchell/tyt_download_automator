@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 
 import requests
+from logzero import logger
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -113,13 +114,14 @@ class Downloader(object):
             folder_path.mkdir(exist_ok=True)
             download_path = folder_path / item.filename
             if download_path.exists():
+                logger.info(f"File '{item.filename}'' previously downloaded, skipping...")
                 continue
             req = requests.get(item.url, stream=True)
-            print(f"Starting download to {download_path}")
+            logger.info(f"Downloading file '{item.filename}'...")
             with download_path.open('wb') as dwn:
                 for chunk in req.iter_content(chunk_size=1024):
                     dwn.write(chunk)
-            print("...Done")
+            logger.info("...Done")
 
 
 class QueuedDownload(object):
