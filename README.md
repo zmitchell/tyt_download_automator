@@ -18,14 +18,23 @@ I use this package to download the shows, rename them to something sensible, and
 * `tyt_download_automator` requires Python 3.6+
 * `geckodriver` must be installed (explained below)
 
-#### Download `tyt_download_automator`
+#### Download and install `tyt_download_automator`
 You can do this by cloning the repository:
 
 ```bash
-git clone https://github.com/zmitchell/tyt_download_automator.git
+$ git clone https://github.com/zmitchell/tyt_download_automator.git
 ```
 
-or by just downloading the ZIP archive. It doesn't really matter where you place `tyt_download_automator`.
+or by just downloading the ZIP archive. It doesn't really matter where you download `tyt_download_automator`.
+
+The next step is to actually install `tyt_download_automator`, which will download the other Python libraries it depends on and install itself to your `site-packages` directory. `cd` into the `tyt_download_automator` folder and do the following:
+
+```bash
+$ cd tyt_download_automator
+$ python setup.py install
+```
+
+You'll also need [geckodriver](https://github.com/mozilla/geckodriver/releases), which is basically a version of Firefox meant to be used in automation and UI testing. You'll need to make sure that the `geckodriver` executable is in your `PATH`. It's very easy to do this, and you can find instructions with a quick search.
 
 #### Login credentials
 You need to be a member of the TYT Network in order to have access to the downloadable content. `tyt_download_automator` pretends to be you when it downloads the shows, so it needs you to store your login credentials in a way that it can read them, specifically as environment variables:
@@ -56,22 +65,9 @@ So, if you choose `/foo` as your download folder, you would see the following fo
 ...
 ```
 
-#### Installing the dependencies
-The last thing you'll need to do before running `tyt_download_automator` is install its dependencies.
-
-The first dependency is [geckodriver](https://github.com/mozilla/geckodriver/releases), which is basically a version of Firefox meant to be used in automation and UI testing. You'll need to make sure that the `geckodriver` executable is in your `PATH`. It's very easy to do this, and you can find instructions with a quick search.
-
-The rest of the dependencies can be installed using `pip`. `cd` into the `tyt_download_automator` folder and do the following:
-
-```bash
-$ pip install -r requirements.txt
-```
-
-`pip` will install the dependencies and you'll be on your way!
-
 #### Running `tyt_download_automator`
 
-Run the project as a module via
+Since you've installed `tyt_download_automator` you can run the project from anywhere via
 ```bash
 $ python -m tyt_download_automator
 ```
@@ -84,6 +80,7 @@ If it's the first time you've used the program (or if it's been a while) the pro
 * Fix the crash on first launch
 * Allow a user configurable polling interval
 * Allow the user to select which shows they want to download, rather than downloading all of them
+* More gracefully handle quitting the program with Ctrl-C
 
 ## Credits
 
