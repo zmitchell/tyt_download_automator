@@ -30,7 +30,6 @@ or by just downloading the ZIP archive. It doesn't really matter where you downl
 The next step is to actually install `tyt_download_automator`, which will download the other Python libraries it depends on and install itself to your `site-packages` directory. `cd` into the `tyt_download_automator` folder and do the following:
 
 ```bash
-$ cd tyt_download_automator
 $ python setup.py install
 ```
 
@@ -40,15 +39,15 @@ You'll also need [geckodriver](https://github.com/mozilla/geckodriver/releases),
 You need to be a member of the TYT Network in order to have access to the downloadable content. `tyt_download_automator` pretends to be you when it downloads the shows, so it needs you to store your login credentials in a way that it can read them, specifically as environment variables:
 
 ```bash
-export TYT_USERNAME="mr_jackpots"
-export TYT_PASSWORD="hunter12"
+$ export TYT_USERNAME="mr_jackpots"
+$ export TYT_PASSWORD="hunter12"
 ```
 
 #### Download folder
 The next step is tellling `tyt_download_automator` where to store the shows that it downloads. This is also set with an environment variable:
 
 ```bash
-export TYT_DOWNLOAD_FOLDER="/path/to/folder"
+$ export TYT_DOWNLOAD_FOLDER="/path/to/folder"
 ```
 
 The downloads will be stored in the following structure:
