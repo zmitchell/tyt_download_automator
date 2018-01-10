@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 from pathlib import Path
@@ -9,8 +10,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-
-from . import config
 
 
 driver = webdriver.Firefox()
@@ -65,12 +64,14 @@ class LoginPage(BasePage):
     """The login page"""
 
     def enter_credentials(self):
+        username = os.environ['TYT_USERNAME']
+        password = os.environ['TYT_PASSWORD']
         username_field = self.driver.find_element_by_id("user_login")
         password_field = self.driver.find_element_by_id("user_pass")
         submit_button = self.driver.find_element_by_xpath("//input[@type='submit']")
 
-        username_field.send_keys(config.username)
-        password_field.send_keys(config.password)
+        username_field.send_keys(username)
+        password_field.send_keys(password)
         submit_button.click()
 
 
@@ -95,8 +96,9 @@ class Downloader(object):
     """Handles downloading and organizing episodes"""
 
     def __init__(self):
+        download_folder = os.environ['TYT_DOWNLOAD_FOLDER']
         self.download_queue = []
-        self.download_root = Path(config.download_folder)
+        self.download_root = Path(download_folder)
 
     def add_to_queue(self, ep):
         self.download_queue.append(ep)
