@@ -1,9 +1,8 @@
 # TYT Download Automator
----
 
 TYT Download Automator automates the process of downloading new episodes for members of the TYT Network
 
-# Why
+## Why
 The Young Turks (TYT) is a web-only news network that produces shows on a variety of topics (politics, sports, pop culture, etc). The main show is a live two-hour stream on YouTube covering news stories from the day with an emphasis on politics. After the show airs, a selection of news stories from the main show are posted to YouTube for anyone to see. For paying subscribers to their network, TYT provides commerical-free downloads of the entire main show, along with downloads of several other shows and podcasts.
 
 I made this package to make my life a little easier. Sure, I could download, move, and rename all of the shows manually, but that's too tedious for my tastes. I also wanted an excuse to play around with Selenium.
@@ -13,7 +12,7 @@ I use this package to download the shows, rename them to something sensible, and
 * Free software: MIT license
 * Disclaimer: I am in no way affiliated with The Young Turks or TYT Network
 
-# Usage
+## Usage
 
 #### System Requirements
 * `tyt_download_automator` requires Python 3.6+
@@ -81,12 +80,12 @@ $ python -m tyt_download_automator
 
 If it's the first time you've used the program (or if it's been a while) the program will crash because Firefox will try to install updates when it launches. This is a known issue, and I'm working on it. For now, all you have to do is launch the program again.
 
-# Plans for the future
+## Plans for the future
 * Fix the crash on first launch
 * Allow a user configurable polling interval
 * Allow the user to select which shows they want to download, rather than downloading all of them
 
-# Credits
+## Credits
 
 This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and a custom project template.
 
