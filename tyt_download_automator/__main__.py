@@ -15,7 +15,8 @@ def main():
         logger.info("Scraping...")
         page_links = main_page.get_episode_page_links()
         download_details = [EpisodePage(link).get_download_details() for link in page_links]
-        queued_downloads = [QueuedDownload(url, filename) for url, filename in download_details]
+        queued_downloads = [QueuedDownload(url, filename) for url, filename in download_details
+                            if (url is not None) and (filename is not None)]
         downloader = Downloader()
         for item in queued_downloads:
             downloader.add_to_queue(item)

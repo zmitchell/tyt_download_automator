@@ -8,7 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 from . import config
 
@@ -82,7 +82,10 @@ class EpisodePage(BasePage):
         self.driver.get(url)
 
     def get_download_details(self):
-        link = self.driver.find_element_by_xpath("//a[text()='Download Video']")
+        try:
+            link = self.driver.find_element_by_xpath("//a[text()='Download Video']")
+        except NoSuchElementException:
+            return (None, None)
         url = link.get_attribute("href")
         filename = link.get_attribute("download")
         return (url, filename)
@@ -104,7 +107,7 @@ class Downloader(object):
             folder_path.mkdir(exist_ok=True)
             download_path = folder_path / item.filename
             if download_path.exists():
-                logger.info(f"File '{item.filename}'' previously downloaded, skipping...")
+                logger.info(f"File '{item.filename}' previously downloaded, skipping...")
                 continue
             req = requests.get(item.url, stream=True)
             logger.info(f"Downloading file '{item.filename}'...")
