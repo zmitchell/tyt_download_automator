@@ -148,7 +148,7 @@ class QueuedDownload(object):
             "OT": "Overtime",
             "BITS": "Behind the Scenes",
             "EL": "Election Coverage",
-            "MC": "The News with Dan Rather",
+            "ND": "The News with Dan Rather",
             "PGC": "TYT Classics",
         }
         match = re.search(r"(\d{2})(\d{2})(\d{2})__(\w{2}).*\.mp4", filename)
