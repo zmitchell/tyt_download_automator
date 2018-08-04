@@ -10,9 +10,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.webdriver import FirefoxOptions
 
+opts = FirefoxOptions()
+opts.add_argument("--headless")
 
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(firefox_options=opts)
 
 
 class BasePage(object):
@@ -143,6 +146,10 @@ class QueuedDownload(object):
             "IN": "TYT Interviews",
             "RI": "Reporting In",
             "OT": "Overtime",
+            "BITS": "Behind the Scenes",
+            "EL": "Election Coverage",
+            "ND": "The News with Dan Rather",
+            "PGC": "TYT Classics",
         }
         match = re.search(r"(\d{2})(\d{2})(\d{2})__(\w{2}).*\.mp4", filename)
         assert match is not None, "Couldn't parse filename"
